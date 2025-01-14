@@ -19,12 +19,12 @@ const ContentLayout: React.FC<LayoutProps> = ({ children }) => {
       <header className={styles.header}>
         <nav>
           <ul className={styles.navList}>
-            <li className={styles.navItem}><Link href="/">Home</Link></li>
+            {/* <li className={styles.navItem}><Link href="/">Home</Link></li>
             <li className={styles.navItem}><Link href="/login">Login</Link></li>
             <li className={styles.navItem}><Link href="/logout">Logout</Link></li>
             <li className={styles.navItem}><Link href="/writers">Writer Dashboard</Link></li>
             <li className={styles.navItem}><Link href="/admin">Admin Dashboard</Link></li>
-            <li className={styles.navItem}><Link href="/contents">Contents</Link></li>
+            <li className={styles.navItem}><Link href="/contents">Contents</Link></li> */}
           </ul>
         </nav>
       </header>

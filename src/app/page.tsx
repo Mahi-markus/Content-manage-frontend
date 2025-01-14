@@ -16,8 +16,9 @@ const HomePage: React.FC = () => {
               <li className={styles.navItem}><Link href="/login">Login</Link></li>
               <li className={styles.navItem}><Link href="/logout">Logout</Link></li>
               <li className={styles.navItem}><Link href="/writers">Writer Dashboard</Link></li>
-              <li className={styles.navItem}><Link href="/admin">Admin Dashboard</Link></li>
+              {/* <li className={styles.navItem}><Link href="/admin">Admin Dashboard</Link></li> */}
               <li className={styles.navItem}><Link href="/contents">Contents</Link></li>
+              <li className={styles.navItem}><Link href="/feedback">Feeback</Link></li>
             </ul>
           </nav>
         </header>
