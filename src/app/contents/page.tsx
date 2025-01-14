@@ -102,6 +102,48 @@ const ContentPage: React.FC = () => {
     }
   };
 
+  const handleApprove = async (contentId: number) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
+      const response = await fetch(
+        `http://localhost:8000/api/contents/${contentId}/approve/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
+        throw new Error(errorData.message || "Failed to approve content");
+      }
+
+      // After successful approval, fetch updated contents
+      const updatedContents = contents.map((content) =>
+        content.id === contentId
+          ? { ...content, status: "Approved", approved_at: new Date().toISOString() }
+          : content
+      );
+      setContents(updatedContents);
+    } catch (error: any) {
+      console.error("Failed to approve content", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -210,6 +252,9 @@ const ContentPage: React.FC = () => {
               onClick={() => handleContentClick(content.id)} // Call the updated function here
             >
               {content.title}
+              <button onClick={() => handleApprove(content.id)}>
+                Approve
+              </button>
             </li>
           ))}
         </ul>
