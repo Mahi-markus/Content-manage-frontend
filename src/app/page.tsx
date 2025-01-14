@@ -19,6 +19,7 @@ const HomePage: React.FC = () => {
               {/* <li className={styles.navItem}><Link href="/admin">Admin Dashboard</Link></li> */}
               <li className={styles.navItem}><Link href="/contents">Contents</Link></li>
               <li className={styles.navItem}><Link href="/feedback">Feeback</Link></li>
+              <li className={styles.navItem}><Link href="/register">Register</Link></li>
             </ul>
           </nav>
         </header>
