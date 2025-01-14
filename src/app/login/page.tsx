@@ -9,11 +9,12 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleSubmit =  (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-    login(username, password);
-   
+      const response = await login(username, password);
+      console.log('Login successful:', response);
+      // Store authentication state (e.g., token) if needed
       router.push('/');
     } catch (error) {
       console.error('Login failed', error);
@@ -43,7 +44,5 @@ const LoginPage: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default LoginPage;

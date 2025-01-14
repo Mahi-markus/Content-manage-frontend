@@ -1,0 +1,31 @@
+/* ContentLayout.module.css */
+
+.header {
+    background-color: #b0bacf;
+    padding: 20px;
+    color: rgb(20, 20, 20);
+    text-align: center;
+  }
+  
+  .navList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navItem {
+    margin: 0 10px;
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .footer {
+    background-color: #e6e7e9;
+    padding: 10px;
+    color: rgb(10, 9, 9);
+    text-align: center;
+  }

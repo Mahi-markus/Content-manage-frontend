@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <html lang="en">
       <body>
         <header>
-          <nav>
+          {/* <nav>
             <ul>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/login">Login</Link></li>
@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <li><Link href="/writers">Writer Dashboard</Link></li>
               <li><Link href="/admin">Admin Dashboard</Link></li>
             </ul>
-          </nav>
+          </nav> */}
         </header>
         <main>{children}</main>
         <footer>

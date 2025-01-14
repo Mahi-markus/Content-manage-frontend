@@ -1,7 +1,5 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8000'; // Ensure this matches your backend API URL
@@ -11,9 +9,28 @@ export const api = axios.create({
   baseURL: API_URL,
 });
 
+// Add a request interceptor to include the token in all requests
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
 // Login function (for reuse elsewhere in your app)
-export const login = (username: string, password: string) => {
-  return api.post('/login/', { username, password });
+export const login = async (username: string, password: string) => {
+  try {
+    const response = await api.post('/login/', { username, password });
+    const { access } = response.data.tokens;
+    localStorage.setItem('authToken', access);
+    return response.data;
+  } catch (error) {
+    console.error('Login failed', error);
+    throw error;
+  }
 };
 
 // Define the logout function that will handle API request
@@ -30,32 +47,3 @@ export const logout = async (token: string) => {
     throw error; // Re-throw the error to be caught in the useEffect
   }
 };
-
-const LogoutPage: React.FC = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const performLogout = async () => {
-      try {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-          throw new Error('No authentication token found.');
-        }
-
-        // Call the logout function with the token
-        await logout(token);
-
-        // Redirect to the login page after successful logout
-        router.push('/login');
-      } catch (error) {
-        console.error('Logout failed', error);
-      }
-    };
-
-    performLogout();
-  }, [router]);
-
-  return <div>Logging out...</div>;
-};
-
-export default LogoutPage;

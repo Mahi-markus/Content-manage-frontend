@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Marking the file as a client component
 
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Updated import for App Router
@@ -12,7 +12,9 @@ const LogoutPage: React.FC = () => {
       try {
         const token = localStorage.getItem('authToken');
         if (!token) {
-          throw new Error('No authentication token found.');
+          console.warn('No authentication token found. Redirecting to login page.');
+          router.push('/login');
+          return;
         }
 
         // Call the logout function with the token
@@ -25,6 +27,8 @@ const LogoutPage: React.FC = () => {
         router.push('/login');
       } catch (error) {
         console.error('Logout failed', error);
+        // Optionally, you can redirect to the login page even if logout fails
+        router.push('/login');
       }
     };
 
