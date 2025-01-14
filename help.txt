@@ -1,0 +1,6 @@
+npm install next react react-dom
+npm install typescript @types/react @types/node --save-dev
+npm install @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+
+
+npm run dev
